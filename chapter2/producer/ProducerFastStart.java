@@ -27,11 +27,11 @@ public class ProducerFastStart {
     public static void main(String[] args) {
         Properties properties = new Properties();
         properties.put("bootstrap.servers", brokerList);
-        properties.put(ProducerConfig.ACKS_CONFIG,"10");    // 可重试异常重试10次
+        properties.put(ProducerConfig.ACKS_CONFIG,"1");    // 可重试异常重试10次
         properties.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG,
                 StringSerializer.class.getName());
         properties.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG,
-                Person.class.getName()); // 自定义value序列化
+                PersonSerializer.class.getName()); // 自定义value序列化
         properties.put(ProducerConfig.INTERCEPTOR_CLASSES_CONFIG, ProducerinterceptorPrefix.class.getName());// 自定义拦截器
 
         KafkaProducer<String, Person> producer = new KafkaProducer<>(properties);
